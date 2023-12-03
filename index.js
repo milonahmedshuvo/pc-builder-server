@@ -33,6 +33,11 @@ async function run() {
     // await client.db("pc-builder-Database").command({ ping: 1 });
     const sixrandomProducts = client.db("pc-builder-Database").collection("sixrandomProducts")
     const featureCategoris  = client.db("pc-builder-Database").collection("featuredCategorisProducts")
+    const topSellingProducts = client.db("pc-builder-Database").collection("topSellingProducts")
+
+
+
+
 
     app.get("/products", async (req, res) => {
         const filter= {}
@@ -60,6 +65,61 @@ async function run() {
        const categoris = await featureCategoris.find(filter).toArray()
        res.send(categoris)
     })
+
+
+    // get one categori by id query 
+    app.get("/categoris/:id", async (req, res) => {
+        const id = req.params.id 
+        const query = {_id: new ObjectId(id)}
+        const result= await featureCategoris.findOne(query)
+        res.send(result)
+    })
+
+
+    // /api/products?category=processor&productId=1234
+
+    // db.collectionName.aggregate([
+    //   { $unwind: "$products" }, 
+    //   { $match: { "products.id": "Processor" } }
+    // ])
+
+    app.get("/datails/:id", async (req, res) =>{
+        const id = req.params.id
+        // const filter = {id: id}
+        // console.log(filter)
+        const query = { "products.id" : id }
+        const result = await featureCategoris.findOne(query)
+        res.send(result)
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // topSellingProducts
+    app.get("/topSellingProducts", async (req, res ) => {
+        const filter = {}
+        const result =  await topSellingProducts.find(filter).toArray()
+        res.send(result)
+    })
+
+
+
+
 
 
 
