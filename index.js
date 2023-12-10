@@ -34,6 +34,9 @@ async function run() {
     const sixrandomProducts = client.db("pc-builder-Database").collection("sixrandomProducts")
     const featureCategoris  = client.db("pc-builder-Database").collection("featuredCategorisProducts")
     const topSellingProducts = client.db("pc-builder-Database").collection("topSellingProducts")
+    const speakerproductsCollection = client.db("pc-builder-Database").collection("speakerproducts")
+
+
 
 
 
@@ -127,6 +130,12 @@ async function run() {
 
 
 
+    // speaker products Collection
+    app.get("/spekerfourImg", async (req, res ) => {
+        const query = {}
+        const img = await speakerproductsCollection.find(query).project({images: 1}).toArray()
+        res.send(img)
+    })
 
 
 
