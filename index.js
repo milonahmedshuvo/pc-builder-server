@@ -137,6 +137,13 @@ async function run() {
         res.send(img)
     })
 
+    app.get("/speaker/:id", async (req, res) => {
+       const id = req.params.id
+       const query = { _id: new ObjectId(id) }
+       const speakerOne = await speakerproductsCollection.findOne(query)
+       res.send(speakerOne)
+    })
+
 
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
