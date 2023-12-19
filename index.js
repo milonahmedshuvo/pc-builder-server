@@ -163,6 +163,20 @@ async function run() {
 
 
 
+
+
+
+
+
+
+    // arrival products Collection 
+    app.get("/arrivalproducts", async (req, res ) => {
+        const query = {}
+        const products = await arrivalproductsCollection.find(query).toArray()
+        res.send(products)
+    })
+
+
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
