@@ -35,6 +35,7 @@ async function run() {
     const featureCategoris  = client.db("pc-builder-Database").collection("featuredCategorisProducts")
     const topSellingProducts = client.db("pc-builder-Database").collection("topSellingProducts")
     const speakerproductsCollection = client.db("pc-builder-Database").collection("speakerproducts")
+    const arrivalproductsCollection = client.db("pc-builder-Database").collection("arrivalproducts")
 
 
 
@@ -142,6 +143,22 @@ async function run() {
        const query = { _id: new ObjectId(id) }
        const speakerOne = await speakerproductsCollection.findOne(query)
        res.send(speakerOne)
+    })
+
+    // checking 
+    app.get("/speaker", async (req, res) => {
+      const query = { }
+      const result = await speakerproductsCollection.find(query).toArray()
+      res.send(result)
+    })
+
+    app.get("/speakerproducts", async (req, res) => {
+      // const query = req.params.id
+      // db.test.find({shapes: {"$elemMatch": {color: "red"}}}
+
+      const result = await speakerproductsCollection
+       
+      res.send(result)
     })
 
 
