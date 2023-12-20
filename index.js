@@ -36,7 +36,7 @@ async function run() {
     const topSellingProducts = client.db("pc-builder-Database").collection("topSellingProducts")
     const speakerproductsCollection = client.db("pc-builder-Database").collection("speakerproducts")
     const arrivalproductsCollection = client.db("pc-builder-Database").collection("arrivalproducts")
-
+    const dealsproductsCollection = client.db("pc-builder-Database").collection("Dealsproducts")
 
 
 
@@ -175,6 +175,24 @@ async function run() {
         const products = await arrivalproductsCollection.find(query).toArray()
         res.send(products)
     })
+
+    app.get("/arrivalproducts/:id", async (req, res) => {
+       const id = req.params.id
+       const query = { _id: new ObjectId(id)}
+       const product = await arrivalproductsCollection.findOne(query)
+       res.send(product)
+    })
+
+
+
+
+    // Deals products functionality set 
+    app.get("/dealsproducts", async (req, res) => {
+        const query = { }
+        const products = await dealsproductsCollection.find(query).toArray()
+        res.send(products)
+    })
+
 
 
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
