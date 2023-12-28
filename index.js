@@ -37,6 +37,7 @@ async function run() {
     const speakerproductsCollection = client.db("pc-builder-Database").collection("speakerproducts")
     const arrivalproductsCollection = client.db("pc-builder-Database").collection("arrivalproducts")
     const dealsproductsCollection = client.db("pc-builder-Database").collection("Dealsproducts")
+    const allproductsCollection = client.db("pc-builder-Database").collection("allproducts")
 
 
 
@@ -202,9 +203,38 @@ async function run() {
 
 
 
+
+
+
+
+
+
+    // all products functionality features in navber product route
+    app.get("/allproducts", async (req, res) => {
+        const query = { }
+        const  allproducts = await allproductsCollection.find(query).toArray()
+        res.send(allproducts)
+    })
+
+    app.get("/pro", async (req, res) => {
+        const filter = {}
+        const product = await featureCategoris.find(filter).toArray()
+        res.send(product)
+    })
+
+    app.get("/prod", async (req, res) => {
+      const filter = { name : {$eq :"Motherboard"} }
+      const product = await featureCategoris.find(filter).toArray()
+      console.log(product)
+      res.send(product)
+  })
+
+    
+
+
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
-    // Ensures that the client will close when you finish/error
+    //Ensures that the client will close when you finish/error
     
   }
 }
