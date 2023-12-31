@@ -88,6 +88,45 @@ async function run() {
     //   { $match: { "products.id": "Processor" } }
     // ])
 
+
+
+
+    app.get("/aggre", async  (req, res ) => {
+      const ress = await featureCategoris.find({}).toArray()
+      res.send(ress)
+    })
+
+
+
+    app.get("/ag/:id", async  (req, res ) => {
+      const id = req.params.id
+      const data = await featureCategoris.find({}).toArray()
+      var store;
+
+      data?.forEach((product) => {
+        // console.log( "what is: ", product)
+        const { name, prodcuts } = product;  
+        // console.log(prodcuts)   // this is array
+        console.log( id )
+        const result = prodcuts.filter(( item ) => item.id === id)
+        console.log(result)
+        if(result){
+          store = result
+        }
+
+        
+
+      })
+
+
+      res.send(store)
+    })
+ 
+
+
+
+
+
     app.get("/datails/:id", async (req, res) =>{
         const id = req.params.id
         // const filter = {id: id}
@@ -223,8 +262,10 @@ async function run() {
     })
 
     app.get("/prod", async (req, res) => {
-      const filter = { name : {$eq :"Motherboard"} }
-      const product = await featureCategoris.find(filter).toArray()
+      // const filter = { name : {$eq :"Motherboard"} }
+      const product = await featureCategoris.find({ "prodcuts.id": {$ne: "1"} }).toArray()
+
+
       console.log(product)
       res.send(product)
   })
