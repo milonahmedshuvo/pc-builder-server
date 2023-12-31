@@ -110,11 +110,10 @@ async function run() {
         console.log( id )
         const result = prodcuts.filter(( item ) => item.id === id)
         console.log(result)
-        if(result){
+        if(result.length == 1){
           store = result
         }
-
-        
+  
 
       })
 
