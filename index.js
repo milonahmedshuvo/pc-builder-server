@@ -97,7 +97,7 @@ async function run() {
     })
 
 
-
+    // Feature product datails page 
     app.get("/ag/:id", async  (req, res ) => {
       const id = req.params.id
       const data = await featureCategoris.find({}).toArray()
@@ -120,6 +120,34 @@ async function run() {
 
       res.send(store)
     })
+
+
+
+
+
+    // get static paths 
+    app.get("/paths", async  (req, res ) => {
+      const id = req.params.id
+      const data = await featureCategoris.find({}).toArray()
+      var store = []
+
+      data?.forEach((product) => {
+        // console.log( "what is: ", product)
+        const { name, prodcuts } = product;  
+        // console.log(prodcuts)   // this is array
+       store.push(prodcuts)
+       
+      })
+
+      res.send(store)
+    })
+
+
+
+
+
+
+
  
 
 
@@ -204,6 +232,7 @@ async function run() {
 
 
 
+    
 
 
 
